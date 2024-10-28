@@ -7,20 +7,25 @@
 </head>
 
 <body>
+	<h1>Login Form</h1>
+
+  <form id="loginForm">
+    <div>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Username">
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Password">
+    </div>
+    <div>
+      <input type="checkbox" id="checkbox">
+      <label for="checkbox">Remember me:</label>
+    </div>
+    <input type="submit" id="submit" value="Submit">
+  </form>
 	<!-- the entire body must be written by student -->
-    <h1>Login Form</h1>
-	<form>
-		<input type="text" placeholder="Username" id="username">
-		<input type="password" placeholder="Password" id="password">
-		<label for="checkbox">Remember me</label>
-		<input type="checkbox" id="checkbox">
-		<input type="submit" value="Submit" id="submit">
-		
-	</form>
-	
-<button type="button" id="existing" style="display:none;">Login as existing user.</button>	
-	
-	<script type="text/javascript" src="./script.js">
+    <script type="text/javascript" src="./script.js">
 </script>
 
 </body>

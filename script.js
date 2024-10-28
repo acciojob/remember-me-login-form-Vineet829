@@ -1,39 +1,49 @@
-let btn = document.querySelector("#submit");
-let exist = document.querySelector("#existing");
-let check = document.querySelector("#checkbox");
-let username = document.querySelector("#username");
-let password = document.querySelector("#password");
+//your JS code here. If required.
+const loginForm = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const rememberCheckbox = document.getElementById('checkbox');
+    const submitButton = document.getElementById('submit');
+    const existingButton = document.createElement('button');
+    existingButton.textContent = 'Login as existing user';
+    existingButton.id = 'existing';
+    existingButton.style.visibility = 'hidden';
+	
 
-btn.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    if (check.checked) {
-        localStorage.setItem("username", username.value);
-        localStorage.setItem("password", password.value);
-    } else {
-        localStorage.removeItem("username");
-        localStorage.removeItem("password");
+    // Check if saved user details exist in localStorage
+    if (localStorage.getItem('username') && localStorage.getItem('password')) {
+      existingButton.style.visibility = 'visible';
     }
 
-    alert("Logged in as " + username.value);
-    updateUserDisplay();
-});
+    document.body.appendChild(existingButton);
 
-const updateUserDisplay = () => {
-    if (localStorage.getItem("username")) {
-        exist.style.display = "block";
-    } else {
-        exist.style.display = "none";
-    }
-};
+    // Event listener for the form submission
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = usernameInput.value;
+      const password = passwordInput.value;
 
-updateUserDisplay();
+      if (rememberCheckbox.checked) {
+        localStorage.setItem('username', username);
+        localStorage.setItem('password', password);
+      } else {
+        localStorage.removeItem('username');
+        localStorage.removeItem('password');
+		existingButton.style.visibility = 'hidden';
+      }
 
-exist.addEventListener("click", (e) => {
-    e.preventDefault();
-    const existingUsername = localStorage.getItem("username");
-    if (existingUsername) {
-        alert("Logged in as " + existingUsername);
-    }
-});
+      alert(`Logged in as ${username}`);
+
+      // If there are saved details, show existing button
+      if (localStorage.getItem('username') && localStorage.getItem('password')) {
+        existingButton.style.visibility = 'visible';
+      }
+    });
+
+    // Event listener for the "Login as existing user" button
+    existingButton.addEventListener('click', function() {
+      const savedUsername = localStorage.getItem('username');
+      alert(`Logged in as ${savedUsername}`);
+		
+    });
 
